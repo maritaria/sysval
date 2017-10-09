@@ -12,9 +12,8 @@ class SensorValue {
 	final int maxValue;
 
 	// INVARIANT(S)
-	//@ invariant failSafe;
-	//@ invariant minValue;
-	//@ invariant maxValue;
+	//@ invariant value >= minValue;
+	//@ invariant value <= maxValue;
 	//@ assignable value;
 
 		/**
@@ -26,12 +25,14 @@ class SensorValue {
 		 *            maximum allowable value for this sensor
 		 */
 		// CONTRACT
-	//@ requires value >= 0 && minValue >= 0 && minValue <= failSafe && failSafe <= maxValue;
+	//@ requires minValue >= 0;
+	//@ requires minValue <= failSafe;
+	//@ requires failSafe <= maxValue;
 	//@ assignable value;
-	//@ ensures this.failSafe == \old(fialSafe);
-	//@ ensures this.minValue == \old(minValue);
-	//@ ensures this.maxValue == \old(maxValue);
-	//@ ensure this.value == failSafe;
+	//@ ensures this.failSafe == failSafe;
+	//@ ensures this.minValue == minValue;
+	//@ ensures this.maxValue == maxValue;
+	//@ ensures this.value == failSafe;
 	SensorValue(int failSafe, int minValue, int maxValue) {
 		this.failSafe = failSafe;
 		this.minValue = minValue;
