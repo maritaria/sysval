@@ -29,7 +29,8 @@ class LookupScale {
 	 * @param size number of break points in the scale
 	 */
 	// CONTRACT
-	//@ requires min >=0 && max > min && size > 0;
+	//@ requires min > 0 && max > min && size > 1;
+	//@ requires ((max - min) % (size - 1)) == 0;
 	//@ requires (\forall int i; i >=0 && i < size; this.values[i]==0);
 	//@ ensures this.values[0]==min;
 	//@ ensures (\forall int i; i >=1 && i < this.values.length; this.values[i]== this.values[i-1] + (max - min)/(size -1));
