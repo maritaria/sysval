@@ -34,7 +34,6 @@ class LookupScale {
 	//@ requires (\forall int i; i >=0 && i < size; this.values[i]==0);
 	//@ ensures this.values[0]==min;
 	//@ ensures (\forall int i; i >=1 && i < this.values.length; this.values[i]== this.values[i-1] + (max - min)/(size -1));
-	
 	LookupScale(int min, int max, int size) {
 		this.values = new int[size];
 		//that values[0] may be a null dereference and checking division by zero 
@@ -54,7 +53,7 @@ class LookupScale {
 	 */
 	// CONTRACT
 	//@ invariant (\forall int i; i >=0 && i < values.length - 2; values[i+1] - values[i] > 0 && values[i+2] - values[i+1] == values[i+1] - values[i]);
-		ScaleIndex lookupValue(SensorValue sv) {
+	ScaleIndex lookupValue(SensorValue sv) {
 		int v = sv.getValue();
 		// First get the integral part
 		// The most convenient way to lookup scales is from the end

@@ -47,7 +47,8 @@ class LookupTable1d {
 		// (note, what you want to check here would normally
 		//  be part of the postcondition, but would produce a very
 		//  elaborate specification).
-		//@assert v >= lookupValues[0] && v <= lookupValues[lookupValues.length - 1];
+		
+		//@ assert v >= lookupValues[0] && v <= lookupValues[lookupValues.length - 1];
 		
 		return v;
 	}
