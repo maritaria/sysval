@@ -86,7 +86,7 @@ class LookupScale {
 	 * Provide a human readable version of this object, makes 
 	 * the output of JMLUnitNG more readable.
 	 */
-	//@ skipesc;
+	// skipesc;
 	public String toString() {
 		String r = "Scale of size "+this.values.length+": [";
 		for(int i = 0; i<this.values.length; i++) {
