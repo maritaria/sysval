@@ -31,15 +31,15 @@ class LookupScale {
 	// CONTRACT
 	//@ normal_behavior
 	//@ requires _max > _min;
-	//@ requires size > 1;
-	//@ requires ((_max - _min) % (size - 1)) == 0;
+	//@ requires size > 0;
+	//@ requires ((_max - _min) % size) == 0;
 	//@ ensures this.values[0]==_min;
-	//@ ensures (\forall int i; i >=1 && i < this.values.length; this.values[i]== this.values[i-1] + (_max - _min)/(size -1));
+	//@ ensures (\forall int i; i >=1 && i < this.values.length; this.values[i]== this.values[i-1] + (_max - _min)/(size));
 	LookupScale(int _min, int _max, int size) {
 		this.values = new int[size];
-		//that values[0] may be a null dereference and checking division by zero 
-		//@ assume values != null && values.length == size && size != 1;
-		int chunk = (_max - _min) / (size - 1);
+		//that values[0] may be a null dereference and checking division by zero
+		//Mistake 2: doing size -1 doesnt allow the range of 2000-6000 to be divisible, off by one.
+		int chunk = (_max - _min) / (size );
 		this.values[0] = _min;
 		for(int i=1; i<this.values.length; i++) {
 		  this.values[i] = this.values[i-1] + chunk;
