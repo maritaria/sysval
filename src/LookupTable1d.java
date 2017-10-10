@@ -48,7 +48,9 @@ class LookupTable1d {
 		//  be part of the postcondition, but would produce a very
 		//  elaborate specification).
 		
-		//@ assert v >= lookupValues[0] && v <= lookupValues[lookupValues.length - 1];
+		// the resulting value must be between any two adjacent elements in the lookupValues.
+		
+		//@ assert (\exists int j; j >= 0 && j < lookupValues.length - 1; v >= lookupValues[j] && v <= lookupValues[j+1]);
 		
 		return v;
 	}
