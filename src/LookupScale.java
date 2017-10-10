@@ -78,7 +78,8 @@ class LookupScale {
 		// Then calculate the fractional part
 		fracPart = (v - this.values[intPart]) * 100 / (this.values[intPart+1] - this.values[intPart]);
 		// ASSERTION(S)
-		//@assert fracPart >= 0 && fracPart < this.values[intPart+1] - this.values[intPart];
+		//@ assert fracPart >= 0;
+		//@ assert fracPart < this.values[intPart+1] - this.values[intPart];
 		return new ScaleIndex(intPart, fracPart, this.values.length);
 	}
 
