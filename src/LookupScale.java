@@ -24,22 +24,23 @@ class LookupScale {
 	/**
 	 * Construct a linear scale that has size break points equally
 	 * distributed between min and max values. 
-	 * @param min minimal value of the scale
-	 * @param max maximal value of the scale
+	 * @param _min minimal value of the scale
+	 * @param _max maximal value of the scale
 	 * @param size number of break points in the scale
 	 */
 	// CONTRACT
-	//@ requires min > 0 && max > min && size > 1;
-	//@ requires ((max - min) % (size - 1)) == 0;
-	//@ requires (\forall int i; i >=0 && i < size; this.values[i]==0);
-	//@ ensures this.values[0]==min;
-	//@ ensures (\forall int i; i >=1 && i < this.values.length; this.values[i]== this.values[i-1] + (max - min)/(size -1));
-	LookupScale(int min, int max, int size) {
+	//@ normal_behavior
+	//@ requires _max > _min;
+	//@ requires size > 1;
+	//@ requires ((_max - _min) % (size - 1)) == 0;
+	//@ ensures this.values[0]==_min;
+	//@ ensures (\forall int i; i >=1 && i < this.values.length; this.values[i]== this.values[i-1] + (_max - _min)/(size -1));
+	LookupScale(int _min, int _max, int size) {
 		this.values = new int[size];
 		//that values[0] may be a null dereference and checking division by zero 
 		//@ assume values != null && values.length == size && size != 1;
-		int chunk = (max - min) / (size - 1);
-		this.values[0] = min;
+		int chunk = (_max - _min) / (size - 1);
+		this.values[0] = _min;
 		for(int i=1; i<this.values.length; i++) {
 		  this.values[i] = this.values[i-1] + chunk;
 		};
