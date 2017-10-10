@@ -47,7 +47,7 @@ class SensorValue {
 	// CONTRACT
 	//@ assignable value;
 	//@ ensures (newValue < minValue || newValue > maxValue) ==> value==failSafe;
-	//@ ensures !(newValue < minValue || newValue > maxValue) ==> value==newValue;
+	//@ ensures (newValue >= minValue && newValue <= maxValue) ==> value==newValue;
 	void readSensor(int newValue) {
 		if(newValue < this.minValue || newValue > this.maxValue) {
 			this.value = this.failSafe;
