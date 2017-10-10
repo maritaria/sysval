@@ -14,6 +14,7 @@ class SensorValue {
 	// INVARIANT(S)
 	//@ invariant value >= minValue;
 	//@ invariant value <= maxValue;
+	//@ invariant minValue < maxValue;
 	//@ assignable value;
 
 		/**
@@ -26,8 +27,6 @@ class SensorValue {
 		 */
 		// CONTRACT
 	//@ requires minValue >= 0;
-	//@ requires minValue <= failSafe;
-	//@ requires failSafe <= maxValue;
 	//@ assignable value;
 	//@ ensures this.failSafe == failSafe;
 	//@ ensures this.minValue == minValue;

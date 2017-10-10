@@ -29,17 +29,18 @@ class LookupScale {
 	 * @param size number of break points in the scale
 	 */
 	// CONTRACT
-	//@ requires min > 0 && max > min && size > 1;
+	//@ requires max > min && size > 1;
 	//@ requires ((max - min) % (size - 1)) == 0;
-	//@ requires (\forall int i; i >=0 && i < size; this.values[i]==0);
 	//@ ensures this.values[0]==min;
 	//@ ensures (\forall int i; i >=1 && i < this.values.length; this.values[i]== this.values[i-1] + (max - min)/(size -1));
 	LookupScale(int min, int max, int size) {
 		this.values = new int[size];
 		//that values[0] may be a null dereference and checking division by zero 
-		//@ assume values != null && values.length == size && size != 1;
+		//@ assume values != null && values.length == size && size > 1;
+		
 		int chunk = (max - min) / (size - 1);
 		this.values[0] = min;
+		//@ loop_invariant i >= 1 && i < size;
 		for(int i=1; i<this.values.length; i++) {
 		  this.values[i] = this.values[i-1] + chunk;
 		};
@@ -78,7 +79,8 @@ class LookupScale {
 		// Then calculate the fractional part
 		fracPart = (v - this.values[intPart]) * 100 / (this.values[intPart+1] - this.values[intPart]);
 		// ASSERTION(S)
-		//@assert fracPart >= 0 && fracPart < this.values[intPart+1] - this.values[intPart];
+		//@ assert fracPart >= 0;
+		//@ assert fracPart < this.values[intPart+1] - this.values[intPart];
 		return new ScaleIndex(intPart, fracPart, this.values.length);
 	}
 
