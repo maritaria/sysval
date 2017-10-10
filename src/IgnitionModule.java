@@ -10,7 +10,7 @@
 class IgnitionModule {
 	
 	SensorValue rpmSensor;
-	LookupScale rpmScale = new LookupScale(600, 8000, 16);
+	LookupScale rpmScale = new LookupScale(2000, 6000, 16);//Mistake one: 600-8000 range is not divisible in 15 parts
 	LookupTable1d ignitionTable = new LookupTable1d(rpmScale,
 		new int[] { 120,  80,  60,  80, 100, 120, 140, 160,
 			         180, 200, 220, 250, 300, 320, 340, 360	});

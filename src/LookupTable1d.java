@@ -20,9 +20,10 @@ class LookupTable1d {
 	 * @param lookupValues the table values
 	 */
 	// CONTRACT
+	//@ normal_behavior
+	//@requires scale.values.length == lookupValues.length;
 	//@ensures this.scaleX == scale;
 	//@ensures this.lookupValues == lookupValues;
-	//@requires scale.values.length == lookupValues.length;
 	LookupTable1d(LookupScale scale, int[] lookupValues) {
 		this.scaleX = scale;
 		this.lookupValues = lookupValues;
@@ -41,6 +42,8 @@ class LookupTable1d {
 		int v = lookupValues[i];
 		if(i<lookupValues.length-1) {
 			int vn = lookupValues[i+1];
+			//@ assert f > 0 ==> v + f <= vn;
+			//@ assert f < 0 ==> v + f >= vn;
 			v = v + f;//NOTE: Scaling not applied, just adding the percentage
 		}
 		// ASSERTION(S)
