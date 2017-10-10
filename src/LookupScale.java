@@ -73,7 +73,7 @@ class LookupScale {
 		// Check border cases
 		if(intPart == this.values.length - 1 || v < this.values[0]) {
 			// ASSERTION(S)
-			//@ assert v < this.values[0] || v > this.values[this.values.length];
+			//@ assert v < this.values[0] || v > this.values[this.values.length-1];
 			return new ScaleIndex(intPart, fracPart, this.values.length);
 		}
 		// Then calculate the fractional part
