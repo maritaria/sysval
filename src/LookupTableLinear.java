@@ -12,6 +12,8 @@ class LookupTableLinear {
 	int range;
 	
 	// INVARIANT
+	//@ invariant startValue % 10 == 0;
+	//@ invariant range % 10 == 0;
 	
 	/**
 	 * Constructs a new linear lookup table
@@ -19,13 +21,16 @@ class LookupTableLinear {
 	 * @param range the value range
 	 */
 	// CONTRACT
-	//@
+	//@ ensures this.startValue == startValue;
+	//@ ensures this.range == range;
 	LookupTableLinear(int startValue, int range) {
 		this.startValue = startValue;
 		this.range = range;
 	}
 	
 	// CONTRACT
+	//@ requires si!=null;
+	////@ensures \result == this.startValue + (range * ((si.getIntPart()*100 + si.getFracPart())/si.getSize())) / 100;;
 	int getValue(ScaleIndex si) {
 		return this.startValue + (range * ((si.getIntPart()*100 + si.getFracPart())/si.getSize())) / 100;
 	}
