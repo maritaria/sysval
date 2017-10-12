@@ -40,7 +40,7 @@ class LookupScale {
 		//Mistake 2: doing size -1 doesnt allow the range of 2000-6000 to be divisible, off by one.
 		int chunk = (_max - _min) / (size );
 		this.values[0] = _min;
-		//@ loop_invariant i >= 1 && i < size;
+		//@ loop_invariant i >= 1 && i <= size;
 		for(int i=1; i<this.values.length; i++) {
 		  this.values[i] = this.values[i-1] + chunk;
 		};
