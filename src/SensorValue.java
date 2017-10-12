@@ -12,9 +12,9 @@ class SensorValue {
 	final int maxValue;
 
 	// INVARIANT(S)
-	//@ invariant value >= minValue;
+	// value could be any number i think revise it again 
+	//@ invariant value >= minValue && value <= maxValue || value == failSafe;
 	//@ invariant failSafe < minValue || failSafe > maxValue;
-	//@ invariant value <= maxValue;
 	//@ invariant minValue < maxValue;
 	//@ assignable value;
 
@@ -46,6 +46,7 @@ class SensorValue {
 	 */
 	// CONTRACT
 	//@ assignable value;
+	// can we say newValue %10==0;?
 	//@ ensures (newValue < minValue || newValue > maxValue) ==> value==failSafe;
 	//@ ensures (newValue >= minValue && newValue <= maxValue) ==> value==newValue;
 	void readSensor(int newValue) {
