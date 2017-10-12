@@ -37,7 +37,6 @@ class LookupScale {
 	//@ ensures (\forall int i; i >=1 && i < this.values.length; this.values[i]== this.values[i-1] + (_max - _min)/(size));
 	LookupScale(int _min, int _max, int size) {
 		this.values = new int[size];
-		//that values[0] may be a null dereference and checking division by zero
 		//Mistake 2: doing size -1 doesnt allow the range of 2000-6000 to be divisible, off by one.
 		int chunk = (_max - _min) / (size );
 		this.values[0] = _min;
