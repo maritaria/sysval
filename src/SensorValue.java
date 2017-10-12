@@ -13,7 +13,7 @@ class SensorValue {
 
 	// INVARIANT(S)
 	//@ invariant (value >= minValue && value <= maxValue) || (value == failSafe);
-	//@ invariant failSafe < minValue || failSafe > maxValue;
+	//@ invariant failSafe >= minValue && failSafe <= maxValue;
 	//@ invariant minValue < maxValue;
 	//@ assignable value;
 
