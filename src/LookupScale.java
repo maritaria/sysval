@@ -45,6 +45,8 @@ class LookupScale {
 		for(int i=1; i<this.values.length; i++) {
 		  this.values[i] = this.values[i-1] + chunk;
 		};
+		//@ assert this.values[this.values.length-1] == _max;
+		//The invariant: is that the difference between min and max must be divisible by size
 	}
 
 	/**
@@ -81,7 +83,7 @@ class LookupScale {
 		fracPart = (v - this.values[intPart]) * 100 / (this.values[intPart+1] - this.values[intPart]);
 		// ASSERTION(S)
 		//@ assert fracPart >= 0;
-		//@ assert fracPart < this.values[intPart+1] - this.values[intPart];
+		//@ assert fracPart < 100;
 		return new ScaleIndex(intPart, fracPart, this.values.length);
 	}
 
