@@ -40,7 +40,7 @@ class LookupTable1d {
 		int i = si.getIntPart();
 		int f = si.getFracPart();
 		int v = lookupValues[i];
-		if(i<lookupValues.length-1) {
+		if(i<lookupValues.length-1 && f > 0) {
 			int vn = lookupValues[i+1];
 			//@ assert f > 0 ==> v + f <= vn;
 			//@ assert f < 0 ==> v + f >= vn;
