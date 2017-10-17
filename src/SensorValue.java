@@ -12,7 +12,7 @@ class SensorValue {
 	final int maxValue;
 
 	// INVARIANT(S)
-	//@ invariant (value >= minValue && value <= maxValue) || (value == failSafe);
+	//@ invariant (value >= minValue && value <= maxValue);
 	//@ invariant failSafe >= minValue && failSafe <= maxValue;
 	//@ invariant minValue < maxValue;
 	//@ assignable value;
@@ -26,7 +26,6 @@ class SensorValue {
 		 *            maximum allowable value for this sensor
 		 */
 		// CONTRACT
-	//@ assignable value;
 	//@ ensures this.failSafe == failSafe;
 	//@ ensures this.minValue == minValue;
 	//@ ensures this.maxValue == maxValue;
@@ -68,7 +67,7 @@ class SensorValue {
 	 * Provide a human readable version of this object, makes 
 	 * the output of JMLUnitNG more readable.
 	 */
-	//skipesc;
+	//@ skipesc;
 	public String toString() {
 		return "SensorValue <"+minValue+"-"+maxValue+", FS="+failSafe+"> = ["+value+"]";
 	}
