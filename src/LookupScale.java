@@ -32,7 +32,7 @@ class LookupScale {
 	//@ normal_behavior
 	//@ requires _max > _min;
 	//@ requires size > 0;
-	//@ requires ((_max - _min) % (size-1)) == 0;
+	// requires ((_max - _min) % (size-1)) == 0;
 	//@ ensures this.values[0]==_min;
 	//@ ensures (\forall int i; i >=1 && i < this.values.length; this.values[i]== this.values[i-1] + (_max - _min)/(size-1));
 	LookupScale(int _min, int _max, int size) {
