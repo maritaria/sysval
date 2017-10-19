@@ -57,14 +57,28 @@ class LookupScale {
 	 */
 	// CONTRACT
 	//@ normal_behavior
-	//@ requires sv != null;
-	//@ ensures \result != null;
-	//@ ensures \result.size == this.values.length;
-	//@ ensures \result.intPart >= 0;
-	//@ ensures \result.intPart < this.values.length;
-	//@ ensures \result.fracPart >= 0;
-	//@ ensures \result.fracPart < 100;
-	//@ ensures this.values[\result.intPart] <= sv.getValue();
+	//@ requires sv.getValue() > this.values[this.values.length -1];
+	//@ ensures \result.getIntPart() == this.values.length - 1;
+	//@ ensures \result.getFracPart() == 0;
+	//@ ensures \result.getSize() == this.values.length;
+	//@
+	//@ also
+	//@
+	//@ normal_behavior
+	//@ requires sv.getValue() < this.values[0];
+	//@ ensures \result.getIntPart() == 0;
+	//@ ensures \result.getFracPart() == 0;
+	//@ ensures \result.getSize() == this.values.length;
+	//@
+	//@ also
+	//@
+	//@ normal_behavior
+	//@ requires sv.getValue() >= this.values[0];
+	//@ requires sv.getValue() <= this.values[this.values.length - 1];
+	//@ ensures this.values[\result.getIntPart()] <= sv.getValue();
+	//@ ensures \result.getFracPart() >= 0;
+	//@ ensures \result.getFracPart() < 100;
+	//@ ensures \result.getSize() == this.values.length;
 	ScaleIndex lookupValue(SensorValue sv) {
 		int v = sv.getValue();
 		// First get the integral part
