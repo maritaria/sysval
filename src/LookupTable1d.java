@@ -42,8 +42,6 @@ class LookupTable1d {
 		int v = lookupValues[i];
 		if(i<lookupValues.length-1 && f > 0) {
 			int vn = lookupValues[i+1];
-			//@ assert f > 0 ==> v + f <= vn;
-			//@ assert f < 0 ==> v + f >= vn;
 			//@ assert (v - vn) != 0;
 			v = v + ((((vn - v) * 100) / f) / 100);//NOTE: Scaling not applied, just adding the percentage
 		}
