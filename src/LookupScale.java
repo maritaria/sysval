@@ -34,7 +34,7 @@ class LookupScale {
 	//@ requires size > 0;
 	//@ requires ((_max - _min) % (size-1)) == 0;
 	//@ ensures this.values[0]==_min;
-	//@ ensures (\forall int i; i >=1 && i < this.values.length; this.values[i]== this.values[i-1] + (_max - _min)/(size));
+	//@ ensures (\forall int i; i >=1 && i < this.values.length; this.values[i]== this.values[i-1] + (_max - _min)/(size-1));
 	LookupScale(int _min, int _max, int size) {
 		this.values = new int[size];
 		//Mistake 2: doing size -1 doesnt allow the range of 2000-6000 to be divisible, off by one.
@@ -43,6 +43,7 @@ class LookupScale {
 		//@ loop_invariant i >= 1 && i <= size && (\forall int j;j>=1 && j<i;this.values[j]-this.values[j-1] == chunk);
 		for(int i=1; i<this.values.length; i++) {
 		  this.values[i] = this.values[i-1] + chunk;
+		  System.out.println(this.values[i]);
 		};
 		//@ assert this.values[this.values.length-1] == _max;
 		//The invariant: is that the difference between min and max must be divisible by size
@@ -83,7 +84,7 @@ class LookupScale {
 		// Check border cases
 		if(intPart == this.values.length - 1 || v < this.values[0]) {
 			// ASSERTION(S)
-			//@ assert v < this.values[0] || v > this.values[this.values.length-1];
+			//@ assert v < this.values[0] || v >= this.values[this.values.length-1];
 			return new ScaleIndex(intPart, fracPart, this.values.length);
 		}
 		// Then calculate the fractional part
