@@ -64,7 +64,8 @@ class SensorValue {
 	 */
 	// CONTRACT
 	//@ensures \result==value;
-	int /* @pure */ getValue() {
+	/*@ pure @*/
+	int getValue() {
 		return this.value;
 	}
 	

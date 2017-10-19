@@ -55,7 +55,15 @@ class LookupScale {
 	 * @return the scale index (integral and fractional part)
 	 */
 	// CONTRACT
-	//@ invariant (\forall int i; i >=0 && i < values.length - 2; values[i+1] - values[i] > 0 && values[i+2] - values[i+1] == values[i+1] - values[i]);
+	//@ normal_behavior
+	//@ requires sv != null;
+	//@ ensures \result != null;
+	//@ ensures \result.size == this.values.length;
+	//@ ensures \result.intPart >= 0;
+	//@ ensures \result.intPart < this.values.length;
+	//@ ensures \result.fracPart >= 0;
+	//@ ensures \result.fracPart < 100;
+	//@ ensures this.values[\result.intPart] <= sv.getValue();
 	ScaleIndex lookupValue(SensorValue sv) {
 		int v = sv.getValue();
 		// First get the integral part

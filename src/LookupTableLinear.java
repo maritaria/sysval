@@ -31,6 +31,7 @@ class LookupTableLinear {
 	//@ normal_behaviour
 	//@ requires si!=null;
 	//@ ensures \result == this.startValue + (range * ((si.getIntPart()*100 + si.getFracPart())/si.getSize())) / 100;
+	/*@ pure @*/
 	int getValue(ScaleIndex si) {
 		return this.startValue + (range * ((si.getIntPart()*100 + si.getFracPart())/si.getSize())) / 100;
 	}
