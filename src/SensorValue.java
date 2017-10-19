@@ -26,6 +26,10 @@ class SensorValue {
 		 *            maximum allowable value for this sensor
 		 */
 		// CONTRACT
+	//@ normal_behavior
+	//@ requires (value >= minValue && value <= maxValue);
+	//@ requires failSafe >= minValue && failSafe <= maxValue;
+	//@ requires minValue < maxValue;
 	//@ ensures this.failSafe == failSafe;
 	//@ ensures this.minValue == minValue;
 	//@ ensures this.maxValue == maxValue;
@@ -43,6 +47,7 @@ class SensorValue {
 	 * @param newValue newly read value
 	 */
 	// CONTRACT
+	//@ normal_behavior
 	//@ assignable value;
 	//@ ensures (newValue < minValue || newValue > maxValue) ==> value==failSafe;
 	//@ ensures (newValue >= minValue && newValue <= maxValue) ==> value==newValue;
